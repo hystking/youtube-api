@@ -1,0 +1,26 @@
+{
+  "name": "front-lib-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "prova": "^2.1.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "coffeeify": "^1.0.0"
+  },
+  "scripts": {
+    "test": "prova test.coffee -b -l firefox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hystking/front-lib-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hystking/front-lib-template/issues"
+  },
+  "homepage": "https://github.com/hystking/front-lib-template"
+}
