@@ -11,6 +11,7 @@
     "coffeeify": "^1.0.0"
   },
   "scripts": {
+    "build": "coffee -c index.coffee",
     "test": "prova test.coffee -b -l firefox"
   },
   "author": "",
