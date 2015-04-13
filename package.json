@@ -13,14 +13,6 @@
   "scripts": {
     "test": "prova test.coffee -b -l firefox"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hystking/front-lib-template.git"
-  },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hystking/front-lib-template/issues"
-  },
-  "homepage": "https://github.com/hystking/front-lib-template"
+  "license": "ISC"
 }
