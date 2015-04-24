@@ -2,7 +2,8 @@
 (function() {
   module.exports = (function() {
     function _Class(arg) {
-      this.d = arg.d, this.w = arg.w;
+      var ref;
+      ref = arg != null ? arg : {}, this.d = ref.d, this.w = ref.w;
       if (this.w == null) {
         this.w = window;
       }
@@ -11,16 +12,21 @@
       }
       this.resolves = [];
       this.isReady = false;
+      this.loadStarted = false;
       this.YT = null;
     }
 
-    _Class.prototype.load = function() {
+    _Class.prototype._load = function() {
       var firstScriptTag, tag;
+      if (this.loadStarted) {
+        return;
+      }
+      this.loadStarted = true;
       this.w.onYouTubeIframeAPIReady = (function(_this) {
         return function() {
           var i, len, ref, resolve, results;
-          _this.YT = _this.w.YT;
           _this.isReady = true;
+          _this.YT = _this.w.YT;
           ref = _this.resolves;
           results = [];
           for (i = 0, len = ref.length; i < len; i++) {
@@ -36,12 +42,31 @@
       return firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     };
 
+    _Class.prototype.load = function() {
+      return new Promise((function(_this) {
+        return function(resolve) {
+          if (_this.isReady) {
+            return resolve(_this.YT);
+          } else if (_this.loadStarted) {
+            return _this.resolves.push(resolve);
+          } else {
+            _this._load();
+            return _this.resolves.push(resolve);
+          }
+        };
+      })(this));
+    };
+
     _Class.prototype.ready = function() {
-      if (this.isReady) {
-        return resolve(this.YT);
-      } else {
-        return this.resolves.push(resolve);
-      }
+      return new Promise((function(_this) {
+        return function(resolve) {
+          if (_this.isReady) {
+            return resolve(_this.YT);
+          } else {
+            return _this.resolves.push(resolve);
+          }
+        };
+      })(this));
     };
 
     return _Class;
