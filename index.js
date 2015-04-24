@@ -45,14 +45,10 @@
     _Class.prototype.load = function() {
       return new Promise((function(_this) {
         return function(resolve) {
-          if (_this.isReady) {
-            return resolve(_this.YT);
-          } else if (_this.loadStarted) {
-            return _this.resolves.push(resolve);
-          } else {
+          if (!_this.loadStarted) {
             _this._load();
-            return _this.resolves.push(resolve);
           }
+          return _this.ready().then(resolve);
         };
       })(this));
     };

@@ -20,13 +20,8 @@ module.exports = class
     firstScriptTag.parentNode.insertBefore tag, firstScriptTag
 
   load: -> new Promise (resolve) =>
-    if @isReady
-      resolve @YT
-    else if @loadStarted
-      @resolves.push resolve
-    else
-      @_load()
-      @resolves.push resolve
+    @_load() unless @loadStarted
+    @ready().then resolve
   
   ready: -> new Promise (resolve) =>
     if @isReady
