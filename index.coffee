@@ -1,2 +1,35 @@
 module.exports = class
-  constructor: ({@arg}) ->
+  constructor: ({@d, @w}={})->
+    @w ?= window
+    @d ?= document
+    @resolves = []
+    @isReady = false
+    @loadStarted = false
+    @YT = null
+
+  _load: ->
+    return if @loadStarted
+    @loadStarted = true
+    @w.onYouTubeIframeAPIReady = =>
+      @isReady = true
+      @YT = @w.YT
+      resolve @YT for resolve in @resolves
+    tag = @d.createElement "script"
+    tag.src = "https://www.youtube.com/iframe_api"
+    firstScriptTag = (@d.getElementsByTagName "script")[0]
+    firstScriptTag.parentNode.insertBefore tag, firstScriptTag
+
+  load: -> new Promise (resolve) =>
+    if @isReady
+      resolve @YT
+    else if @loadStarted
+      @resolves.push resolve
+    else
+      @_load()
+      @resolves.push resolve
+  
+  ready: -> new Promise (resolve) =>
+    if @isReady
+      resolve @YT
+    else
+      @resolves.push resolve

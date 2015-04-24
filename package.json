@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "coffee -c index.coffee",
-    "test": "prova test.coffee -b -l firefox"
+    "test": "prova test.coffee -b -l chrome"
   },
   "author": "",
   "license": "ISC"
