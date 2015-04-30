@@ -1,7 +1,7 @@
-module.exports = class
+_YoutubeAPI = class
   constructor: ({@d, @w}={})->
     @w ?= window
-    @d ?= document
+    @d ?= @w.document or document
     @resolves = []
     @isReady = false
     @loadStarted = false
@@ -28,3 +28,5 @@ module.exports = class
       resolve @YT
     else
       @resolves.push resolve
+
+module.exports = (p) -> new _YoutubeAPI p

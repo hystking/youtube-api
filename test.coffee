@@ -1,7 +1,7 @@
 test = require "prova"
-YoutubeAPI = require "./index.coffee"
+#YoutubeAPI = 
 
-youtubeAPI = new YoutubeAPI
+youtubeAPI = do require "./index.coffee"
 
 videoDom = document.createElement "div"
 videoDom.id = "video"
